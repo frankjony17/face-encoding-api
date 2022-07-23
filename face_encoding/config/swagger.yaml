@@ -1,0 +1,118 @@
+swagger: '2.0'
+
+info:
+  version: 0.1.1
+  title: Face Encoding API
+  description: "Maps an image of a human face to a 128 dimensional vector space."
+  contact:
+    email: c1299701@interno.bb.com.br, c1298367@interno.bb.com.br, c1310169@interno.bb.com.br
+
+schemes:
+  - http
+
+tags:
+  - name: Face Encoding
+    description: "Process a person's face and extract a 128 dimensional vector."
+
+paths:
+  /image/face-encoding:
+    post:
+      tags:
+        - Face Encoding
+      description: 'Return the a 128 dimensional vector from a person face.'
+      parameters:
+        - name: image_face
+          in: body
+          required: true
+          description: 'Image encoded in base64 (b64_image) and bounding boxes of each face (face_locations).'
+          schema:
+            $ref: '#/definitions/ImageFaceEncoding'
+      responses:
+        '200':
+          description: 'OK'
+          schema:
+            $ref: '#/definitions/Response200'
+        '400':
+          description: 'Bad Request, wrong syntax'
+          schema:
+            $ref: '#/definitions/Error400'
+        '400-1':
+          description: 'Bad Request, wrong base64'
+          schema:
+            $ref: '#/definitions/Error400-1'
+        '400-4':
+          description: 'Bad Request, required parameters missing'
+          schema:
+            $ref: '#/definitions/Error400-4'
+        '400-8':
+          description: 'Bad Request, required value is invalid.'
+          schema:
+            $ref: '#/definitions/Error400-8'
+
+definitions:
+  ImageFaceEncoding:
+    type: object
+    required:
+      - b64_image
+      - face_locations
+    properties:
+      b64_image:
+        type: string
+        example: 'ZXhhbXBsZQ=='
+      face_locations:
+        type: array
+        example: [{"bottom": 452, "left": 165, "right": 423, "top": 194}]
+
+  Response200:
+    type: object
+    properties:
+    example: {
+      "number_of_faces": 1,
+      "cropped_faces": true,
+      "data": [{
+         "bounding_box": [{'left': 45, 'top': 294, 'right': 194, 'bottom': 443}],
+         "cropped_face": 'ZXhhbXBsZQ=='
+       }]
+    }
+
+  Error400:
+    type: object
+    properties:
+      message:
+        type: string
+        example: 'Bad Request, wrong syntax'
+      details:
+        type: string
+        example: 'The request could not be understood by the server due to
+        malformed syntax. The client SHOULD NOT repeat the request without
+        modifications.'
+
+  Error400-1:
+    type: object
+    properties:
+      message:
+        type: string
+        example: 'Bad Request, wrong base64'
+      details:
+        type: string
+        example: 'Wrong base64 format.'
+
+  Error400-4:
+    type: object
+    properties:
+      message:
+        type: string
+        example: 'Bad Request, required parameters missing'
+      details:
+        type: string
+        example: "Required parameters wasn't found."
+
+  Error400-8:
+    type: object
+    properties:
+      message:
+        type: string
+        example: 'Bad Request, required value is invalid.'
+      details:
+        type: string
+        example: "The value of the face_locations parameter must be a list ([])."
