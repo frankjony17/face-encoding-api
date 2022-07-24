@@ -7,12 +7,12 @@ ARG VERSAO=0.1.0
 ARG BOM_PATH="/docker/fks"
 
 LABEL \
-    br.com.bb.image.app.sigla="fks" \
-    br.com.bb.image.app.provider="" \
-    br.com.bb.image.app.arch="x86_64" \
-    br.com.bb.image.app.maintainer="FkSolutions / <frankjony17@gmail.com>" \
-    br.com.bb.image.app.version="$VERSAO" \
-    br.com.bb.image.description="" \
+    br.com.fk.image.app.sigla="fks" \
+    br.com.fk.image.app.provider="" \
+    br.com.fk.image.app.arch="x86_64" \
+    br.com.fk.image.app.maintainer="FkSolutions / <frankjony17@gmail.com>" \
+    br.com.fk.image.app.version="$VERSAO" \
+    br.com.fk.image.description="" \
     org.label-schema.maintainer="FkSolutions / <frankjony17@gmail.com>" \
     org.label-schema.vendor="FkSolutions" \
     org.label-schema.url="https://github.com/frankjony17/face-encoding-api" \

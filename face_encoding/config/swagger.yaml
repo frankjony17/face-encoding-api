@@ -1,11 +1,11 @@
 swagger: '2.0'
 
 info:
-  version: 0.1.1
+  version: 0.0.1
   title: Face Encoding API
   description: "Maps an image of a human face to a 128 dimensional vector space."
   contact:
-    email: c1299701@interno.bb.com.br, c1298367@interno.bb.com.br, c1310169@interno.bb.com.br
+    email: frankjony17@gmail.com
 
 schemes:
   - http
